@@ -10,12 +10,17 @@
 			document.getElementById(`${type}-version`).innerText = process.versions[type];
 		}
 		
-		const ioHook = require('../../index');
-		ioHook.start(true);
-		ioHook.on('mouseclick', eventHandler);
-		ioHook.on('keydown', eventHandler);
-		ioHook.on('mousewheel', eventHandler);
-		ioHook.on('mousemove', eventHandler);
+		try {
+			const ioHook = require('../../index');
+			ioHook.start(true);
+			ioHook.on('mouseclick', eventHandler);
+			ioHook.on('keydown', eventHandler);
+			ioHook.on('mousewheel', eventHandler);
+			ioHook.on('mousemove', eventHandler);
+		} catch(err) {
+			console.error(err);
+			document.getElementById("ioHookEvent").innerText = "iohook init failed, see console";
+		}
 	})
 
 	function eventHandler(event) {
